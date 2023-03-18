@@ -12,23 +12,35 @@ Students can register to a course they like.
 
 ## API
 
-GET /courses
-GET /courses/:id
-POST /courses
-PATCH /courses/:id
-DELETE /courses/:id
+GET /classes
+GET /classes/:id
+POST /classes
+PATCH /classes/:id
+DELETE /classes/:id
 
 GET /teachers
-GET /teachers/:id/courses
+GET /teachers/:id
+POST /teachers
+PATCH /teachers/:id
+DELETE /teachers/:id
 
-Endpoints will include at least…
-- Two GET requests
-- One POST request
-- One PATCH request
-- One DELETE request
+GET /students
+GET /students/:id
+POST /students
+PATCH /students/:id
+DELETE /students/:id
+
+GET /dance_types
 
 ## Frontend
 
+## Deployment
+
+Render.com is linked to this Github repository, whenever a new commit is pushed on 
+master, it triggers a new deployment using the last commit.
+
+
+## Instruction
 Models will include at least…
 - Two classes with primary keys at at least two attributes each
 - [Optional but encouraged] One-to-many or many-to-many relationships between classes
