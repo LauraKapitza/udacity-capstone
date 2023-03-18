@@ -1,6 +1,7 @@
-from flask import Flask
+from config import app
+from models import *
 
-app = Flask(__name__)
+
 
 
 @app.route('/')
