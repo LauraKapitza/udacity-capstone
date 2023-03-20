@@ -52,13 +52,13 @@ def get_class(payload, class_id):
 
 
 @app.route('/', methods=["POST"])
-@requires_auth("classes:add")
+@requires_auth("classes:create")
 def create_class(payload):
     body = request.get_json()
 
     # creates new dance class
     new_class = Class(
-        teacher_id=body.get("teacher", None),
+        teacher_id=payload["sub"],
         dance_types=body.get("dance_types", []),
         title=body.get("title", None),
         description=body.get("description", None),
@@ -77,12 +77,12 @@ def create_class(payload):
 
 # route for students to add themselves to a dance class
 @app.route('/<int:class_id>/participants', methods=["POST"])
-def add_participant(class_id):
+@requires_auth("classes:update")
+def add_participant(payload, class_id):
     dance_class = Class.query.filter_by(id=class_id).first_or_404()
 
     # finds student by user id
-    body = request.get_json()
-    user_id = body.get("user_id", None)
+    user_id = payload["sub"]
     student = Student.query.filter_by(id=user_id).first_or_404()
 
     # throws error when user is already a participant
@@ -102,12 +102,12 @@ def add_participant(class_id):
 
 # route for students to add themselves to a dance class
 @app.route('/<int:class_id>/participants', methods=["DELETE"])
-def remove_participant(class_id):
+@requires_auth("classes:update")
+def remove_participant(payload, class_id):
     dance_class = Class.query.filter_by(id=class_id).first_or_404()
 
     # finds student by user id
-    body = request.get_json()
-    user_id = body.get("user_id", None)
+    user_id = payload["sub"]
     student = Student.query.filter_by(id=user_id).first_or_404()
 
     # throws error when user is not a participant
@@ -127,10 +127,11 @@ def remove_participant(class_id):
 
 # route for teachers to update an existing dance class
 @app.route('/<int:class_id>', methods=["PATCH"])
-def update_class(class_id):
+@requires_auth("classes:update")
+def update_class(payload, class_id):
     # gets potential  new dance class values
     body = request.get_json()
-    user_id = body.get("user_id", None)
+    user_id = payload["sub"]
     body_fields = [
         {"name": "dance_types", "value": body.get("dance_types", [])},
         {"name": "title", "value": body.get("title", None)},
@@ -158,7 +159,8 @@ def update_class(class_id):
 
 
 @app.route('/<int:class_id>', methods=["DELETE"])
-def delete_class(class_id):
+@requires_auth("classes:delete")
+def delete_class(payload, class_id):
     dance_class = Class.query.filter_by(id=class_id).first_or_404()
     dance_class.delete()
 
@@ -173,6 +175,7 @@ def delete_class(class_id):
 # ---------------------------------------------------------------------------- #
 
 @app.route('/teachers')
+@requires_auth("teachers:read")
 def get_teachers():
     # try:
     page = request.args.get("page", 1, type=int)
@@ -191,10 +194,12 @@ def get_teachers():
 #     abort(422)
 
 @app.route('/teachers', methods=["POST"])
+@requires_auth("teachers:create")
 def add_teacher():
     body = request.get_json()
 
     teacher = Teacher(
+        id=body.get("user_id", None),
         first_name=body.get("first_name", None),
         last_name=body.get("last_name", None),
         dance_types=body.get("dance_types", [])
@@ -207,8 +212,9 @@ def add_teacher():
         "teacher": teacher.format_long()
     })
 
-
+# TODO create teachers/me for a teacher to get their details
 @app.route('/teachers/<int:teacher_id>')
+@requires_auth("teachers:read")
 def get_teacher(teacher_id):
     # try:
     teacher = Teacher.query.filter_by(id=teacher_id).first_or_404()
@@ -223,8 +229,9 @@ def get_teacher(teacher_id):
 #     print(err)
 #     abort(422)
 
-
+# TODO add logic for teacher  to update their details
 @app.route('/teachers/<int:teacher_id>', methods=["PATCH"])
+@requires_auth("teachers:update")
 def update_teacher(teacher_id):
     body = request.get_json()
     body_fields = [
@@ -250,6 +257,7 @@ def update_teacher(teacher_id):
 
 
 @app.route('/teachers/<int:teacher_id>', methods=["DELETE"])
+@requires_auth("teachers:delete")
 def delete_teacher(teacher_id):
     teacher = Teacher.query.filter_by(id=teacher_id).first_or_404()
     teacher.delete()
@@ -265,7 +273,8 @@ def delete_teacher(teacher_id):
 # ---------------------------------------------------------------------------- #
 
 @app.route('/students')
-def get_students():
+@requires_auth("students:read")
+def get_students(payload):
     # try:
     page = request.args.get("page", 1, type=int)
     students = Student.query.order_by(Student.last_name).all()
@@ -282,11 +291,14 @@ def get_students():
 #     print(err)
 #     abort(422)
 
+# TODO add logic for student to create student
 @app.route('/students', methods=["POST"])
-def add_student():
+@requires_auth("students:create")
+def add_student(payload):
     body = request.get_json()
 
     student = Student(
+        id=body.get("id", None),
         first_name=body.get("first_name", None),
         last_name=body.get("last_name", None)
     )
@@ -298,9 +310,10 @@ def add_student():
         "student": student.format_long()
     })
 
-
-@app.route('/students/<int:student_id>')
+# TODO change students:add to all:read to have a generic read permission for all user types
+@app.route('/students/<string:student_id>')
 def get_student(student_id):
+    print(student_id)
     # try:
     student = Student.query.filter_by(id=student_id).first_or_404()
 
@@ -314,8 +327,9 @@ def get_student(student_id):
 #     print(err)
 #     abort(422)
 
-
+# TODO add logic for student to change their details
 @app.route('/students/<int:student_id>', methods=["PATCH"])
+@requires_auth("students:update")
 def update_student(student_id):
     body = request.get_json()
     body_fields = [
@@ -339,7 +353,9 @@ def update_student(student_id):
     })
 
 
+#TODO add admin:delete role for admin to delete stuff
 @app.route('/students/<int:student_id>', methods=["DELETE"])
+@requires_auth("students:delete")
 def delete_student(student_id):
     student = Student.query.filter_by(id=student_id).first_or_404()
     student.delete()
