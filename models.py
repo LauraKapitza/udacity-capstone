@@ -98,7 +98,7 @@ class Class(db.Model):
 class Teacher(db.Model):
     __tablename__ = "teachers"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String, primary_key=True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     classes = db.relationship("Class", back_populates="teacher")
@@ -135,7 +135,7 @@ class Teacher(db.Model):
 class Student(db.Model):
     __tablename__ = "students"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String, primary_key=True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     dance_classes = db.relationship("Class",
