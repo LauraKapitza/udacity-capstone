@@ -64,7 +64,7 @@ def check_permissions(permission, payload):
     return True
 
 
-def verify_decode_jwt(token):
+def decode_jwt(token):
     try:
         # gets the signing key
         issuer_url = f'https://{AUTH0_DOMAIN}/'
@@ -79,13 +79,37 @@ def verify_decode_jwt(token):
             audience=API_AUDIENCE,
             issuer=issuer_url
         )
-
+        print("payload", payload)
         return payload
 
     except jwt.ExpiredSignatureError:
         raise AuthError({
             'code': 'token_expired',
             'description': 'Token expired.'
+        }, 401)
+
+    except jwt.InvalidKeyError:
+        raise AuthError({
+            'code': 'decoded_error',
+            'description': 'Unable to decode token.'
+        }, 401)
+
+    except jwt.InvalidSignatureError:
+        raise AuthError({
+            'code': 'invalid_signature',
+            'description': 'Invalid signature.'
+        }, 401)
+
+    except jwt.InvalidAudienceError:
+        raise AuthError({
+            'code': 'invalid_audience',
+            'description': 'Invalid audience.'
+        }, 401)
+
+    except jwt.InvalidIssuerError:
+        raise AuthError({
+            'code': 'invalid_issuer',
+            'description': 'Invalid issuer.'
         }, 401)
 
     except jwt.InvalidTokenError:
@@ -114,7 +138,7 @@ def requires_auth(permission=''):
         @wraps(f)
         def wrapper(*args, **kwargs):
             token = get_token_auth_header()
-            payload = verify_decode_jwt(token)
+            payload = decode_jwt(token)
             check_permissions(permission, payload)
             return f(payload, *args, **kwargs)
 
