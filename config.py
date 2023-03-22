@@ -11,7 +11,3 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-
-# TODO:
-#  DONT FORGET TO CLEAR THE DB AND
-#  RUN flask db migrate
