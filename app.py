@@ -1,3 +1,5 @@
+from functools import wraps
+
 from flask import jsonify, abort, request
 
 from auth.auth import requires_auth, AuthError
@@ -15,6 +17,24 @@ def paginate_models(page, models):
 
     return sliced_data
 
+def handle_exception():
+    def handle_exception_decorator(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            try:
+                return f(*args, **kwargs)
+            except Exception as err:
+                print(err)
+                abort(422)
+        return wrapper
+    return handle_exception_decorator
+
+# ---------------------------------------------------------------------------- #
+# healthcheck routes
+# ---------------------------------------------------------------------------- #
+@app.route('/healthcheck')
+def healthcheck():
+    return "ok"
 
 # ---------------------------------------------------------------------------- #
 # Class routes
@@ -22,8 +42,8 @@ def paginate_models(page, models):
 
 @app.route('/classes')
 @requires_auth("classes:read")
+@handle_exception()
 def get_classes(payload):
-    # try:
     page = request.args.get("page", 1, type=int)
     classes = Class.query.order_by(Class.id).all()
     paginated_classes = paginate_models(page, classes)
@@ -34,13 +54,9 @@ def get_classes(payload):
         "total_classes": len(classes),
     })
 
-
-# except Exception as err:
-#     print(err)
-#     abort(422)
-
 @app.route('/classes/<int:class_id>')
 @requires_auth("classes:read")
+@handle_exception()
 def get_class(payload, class_id):
     dance_class = Class.query.filter_by(id=class_id).first_or_404()
 
@@ -52,6 +68,7 @@ def get_class(payload, class_id):
 
 @app.route('/classes', methods=["POST"])
 @requires_auth("classes:create")
+@handle_exception()
 def create_class(payload):
     body = request.get_json()
 
@@ -77,6 +94,7 @@ def create_class(payload):
 # route for students to add themselves to a dance class
 @app.route('/classes/<int:class_id>/participants', methods=["POST"])
 @requires_auth("classes:join")
+@handle_exception()
 def add_participant(payload, class_id):
     dance_class = Class.query.filter_by(id=class_id).first_or_404()
 
@@ -102,6 +120,7 @@ def add_participant(payload, class_id):
 # route for students to add themselves to a dance class
 @app.route('/classes/<int:class_id>/participants', methods=["DELETE"])
 @requires_auth("classes:join")
+@handle_exception()
 def remove_participant(payload, class_id):
     dance_class = Class.query.filter_by(id=class_id).first_or_404()
 
@@ -127,6 +146,7 @@ def remove_participant(payload, class_id):
 # route for teachers to update an existing dance class
 @app.route('/classes/<int:class_id>', methods=["PATCH"])
 @requires_auth("classes:update")
+@handle_exception()
 def update_class(payload, class_id):
     # gets potential  new dance class values
     body = request.get_json()
@@ -159,6 +179,7 @@ def update_class(payload, class_id):
 
 @app.route('/classes/<int:class_id>', methods=["DELETE"])
 @requires_auth("classes:delete")
+@handle_exception()
 def delete_class(payload, class_id):
     dance_class = Class.query.filter_by(id=class_id).first_or_404()
     dance_class.delete()
@@ -175,6 +196,7 @@ def delete_class(payload, class_id):
 
 @app.route('/teachers')
 @requires_auth("teachers:read")
+@handle_exception()
 def get_teachers(payload):
     # try:
     page = request.args.get("page", 1, type=int)
@@ -194,6 +216,7 @@ def get_teachers(payload):
 
 @app.route('/teachers', methods=["POST"])
 @requires_auth("teachers:create")
+@handle_exception()
 def add_teacher(payload):
     body = request.get_json()
 
@@ -214,6 +237,7 @@ def add_teacher(payload):
 # TODO create teachers/me for a teacher to get their details
 @app.route('/teachers/<string:teacher_id>')
 @requires_auth("teachers:read")
+@handle_exception()
 def get_teacher(payload, teacher_id):
     # try:
     teacher = Teacher.query.filter_by(id=teacher_id).first_or_404()
@@ -231,6 +255,7 @@ def get_teacher(payload, teacher_id):
 # TODO add logic for teacher  to update their details
 @app.route('/teachers/<string:teacher_id>', methods=["PATCH"])
 @requires_auth("teachers:update")
+@handle_exception()
 def update_teacher(payload, teacher_id):
     body = request.get_json()
     body_fields = [
@@ -257,6 +282,7 @@ def update_teacher(payload, teacher_id):
 
 @app.route('/teachers/<string:teacher_id>', methods=["DELETE"])
 @requires_auth("teachers:delete")
+@handle_exception()
 def delete_teacher(payload, teacher_id):
     teacher = Teacher.query.filter_by(id=teacher_id).first_or_404()
     teacher.delete()
@@ -273,6 +299,7 @@ def delete_teacher(payload, teacher_id):
 
 @app.route('/students')
 @requires_auth("students:read")
+@handle_exception()
 def get_students(payload):
     # try:
     page = request.args.get("page", 1, type=int)
@@ -293,6 +320,7 @@ def get_students(payload):
 # TODO add logic for student to create student
 @app.route('/students', methods=["POST"])
 @requires_auth("students:create")
+@handle_exception()
 def add_student(payload):
     body = request.get_json()
 
@@ -312,6 +340,7 @@ def add_student(payload):
 # TODO change students:add to all:read to have a generic read permission for all user types
 @app.route('/students/<string:student_id>')
 @requires_auth("students:read")
+@handle_exception()
 def get_student(payload, student_id):
     # try:
     student = Student.query.filter_by(id=student_id).first_or_404()
@@ -329,6 +358,7 @@ def get_student(payload, student_id):
 # TODO add logic for student to change their details
 @app.route('/students/<string:student_id>', methods=["PATCH"])
 @requires_auth("students:update")
+@handle_exception()
 def update_student(payload,student_id):
     body = request.get_json()
     body_fields = [
@@ -355,6 +385,7 @@ def update_student(payload,student_id):
 #TODO add admin:delete role for admin to delete stuff
 @app.route('/students/<string:student_id>', methods=["DELETE"])
 @requires_auth("students:delete")
+@handle_exception()
 def delete_student(payload,student_id):
     student = Student.query.filter_by(id=student_id).first_or_404()
     student.delete()
@@ -370,8 +401,8 @@ def delete_student(payload,student_id):
 # ---------------------------------------------------------------------------- #
 
 @app.route('/dance-types')
+@handle_exception()
 def get_dance_types():
-    # try:
     dance_types = [type.format() for type in DanceTypes]
 
     return jsonify({
@@ -379,11 +410,6 @@ def get_dance_types():
         "dance_types": dance_types,
         "total_dance_types": len(dance_types),
     })
-
-
-# except Exception as err:
-#     print(err)
-#     abort(422)
 
 
 # ---------------------------------------------------------------------------- #
