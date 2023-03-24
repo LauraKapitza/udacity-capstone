@@ -8,6 +8,8 @@ from models import *
 
 PAGE_LIMIT = 10
 
+DEFAULT_MAX_PARTICIPANTS = 10
+
 
 def paginate_models(page, models):
     start = (page - 1) * PAGE_LIMIT
@@ -17,20 +19,6 @@ def paginate_models(page, models):
     sliced_data = formatted_data[start:end]
 
     return sliced_data
-
-
-# def handle_exception():
-#     def handle_exception_decorator(f):
-#         @wraps(f)
-#         def wrapper(*args, **kwargs):
-#             try:
-#                 return f(*args, **kwargs)
-#             except Exception as err:
-#                 abort(422)
-#
-#         return wrapper
-#
-#     return handle_exception_decorator
 
 
 # ---------------------------------------------------------------------------- #
@@ -44,6 +32,19 @@ def healthcheck():
 # ---------------------------------------------------------------------------- #
 # Class routes
 # ---------------------------------------------------------------------------- #
+
+
+@app.route("/classes/<int:class_id>")
+@requires_auth("classes:read")
+def get_class(payload, class_id):
+    dance_class = Class.query.filter_by(id=class_id).first_or_404()
+
+    return jsonify(
+        {
+            "success": True,
+            "class": dance_class.format_long(),
+        }
+    )
 
 
 @app.route("/classes")
@@ -62,34 +63,30 @@ def get_classes(payload):
     )
 
 
-@app.route("/classes/<int:class_id>")
-@requires_auth("classes:read")
-def get_class(payload, class_id):
-    dance_class = Class.query.filter_by(id=class_id).first_or_404()
-
-    return jsonify(
-        {
-            "success": True,
-            "class": dance_class.format_long(),
-        }
-    )
-
-
 @app.route("/classes", methods=["POST"])
 @requires_auth("classes:create")
 def create_class(payload):
     body = request.get_json()
 
+    title = body.get("title", None)
+    description = body.get("description", None)
+    date = body.get("date", None)
+    start_time = body.get("start_time", None)
+    end_time = body.get("end_time", None)
+
+    if [x for x in (title, description, date, start_time, end_time) if x is None]:
+        abort(400)
+
     # creates new dance class
     new_class = Class(
         teacher_id=payload["sub"],
+        title=title,
+        description=description,
+        date=date,
+        start_time=start_time,
+        end_time=end_time,
         dance_types=body.get("dance_types", []),
-        title=body.get("title", None),
-        description=body.get("description", None),
-        max_participants=body.get("max_participants", None),
-        date=body.get("date", None),
-        start_time=body.get("start_time", None),
-        end_time=body.get("end_time", None),
+        max_participants=body.get("max_participants", DEFAULT_MAX_PARTICIPANTS),
     )
     new_class.insert()
 
@@ -205,7 +202,6 @@ def delete_class(payload, class_id):
 @app.route("/teachers")
 @requires_auth("teachers:read")
 def get_teachers(payload):
-    # try:
     page = request.args.get("page", 1, type=int)
     teachers = Teacher.query.order_by(Teacher.last_name).all()
     paginated_teachers = paginate_models(page, teachers)
@@ -219,21 +215,24 @@ def get_teachers(payload):
     )
 
 
-# except Exception as err:
-#     print(err)
-#     abort(422)
-
-
 @app.route("/teachers", methods=["POST"])
 @requires_auth("teachers:create")
 def add_teacher(payload):
     body = request.get_json()
 
+    user_id = body.get("user_id", None)
+    first_name = body.get("first_name", None)
+    last_name = body.get("last_name", None)
+    dance_types = body.get("dance_types", None)
+
+    if [x for x in (user_id, first_name, last_name, dance_types) if x is None]:
+        abort(400)
+
     teacher = Teacher(
-        id=body.get("user_id", None),
-        first_name=body.get("first_name", None),
-        last_name=body.get("last_name", None),
-        dance_types=body.get("dance_types", []),
+        id=user_id,
+        first_name=first_name,
+        last_name=last_name,
+        dance_types=dance_types,
     )
 
     teacher.insert()
@@ -241,22 +240,14 @@ def add_teacher(payload):
     return jsonify({"success": True, "teacher": teacher.format_long()})
 
 
-# TODO create teachers/me for a teacher to get their details
 @app.route("/teachers/<string:teacher_id>")
 @requires_auth("teachers:read")
 def get_teacher(payload, teacher_id):
-    # try:
     teacher = Teacher.query.filter_by(id=teacher_id).first_or_404()
 
     return jsonify({"success": True, "teacher": teacher.format_long()})
 
 
-# except Exception as err:
-#     print(err)
-#     abort(422)
-
-
-# TODO add logic for teacher  to update their details
 @app.route("/teachers/<string:teacher_id>", methods=["PATCH"])
 @requires_auth("teachers:update")
 def update_teacher(payload, teacher_id):
@@ -302,7 +293,6 @@ def delete_teacher(payload, teacher_id):
 @app.route("/students")
 @requires_auth("students:read")
 def get_students(payload):
-    # try:
     page = request.args.get("page", 1, type=int)
     students = Student.query.order_by(Student.last_name).all()
     paginated_students = paginate_models(page, students)
@@ -316,21 +306,23 @@ def get_students(payload):
     )
 
 
-# except Exception as err:
-#     print(err)
-#     abort(422)
-
-
 # TODO add logic for student to create student
 @app.route("/students", methods=["POST"])
 @requires_auth("students:create")
 def add_student(payload):
     body = request.get_json()
 
+    user_id = body.get("user_id", None)
+    first_name = body.get("first_name", None)
+    last_name = body.get("last_name", None)
+
+    if [x for x in (user_id, first_name, last_name) if x is None]:
+        abort(400)
+
     student = Student(
-        id=body.get("user_id", None),
-        first_name=body.get("first_name", None),
-        last_name=body.get("last_name", None),
+        id=user_id,
+        first_name=first_name,
+        last_name=last_name,
     )
 
     student.insert()
@@ -342,15 +334,9 @@ def add_student(payload):
 @app.route("/students/<string:student_id>")
 @requires_auth("students:read")
 def get_student(payload, student_id):
-    # try:
     student = Student.query.filter_by(id=student_id).first_or_404()
 
     return jsonify({"success": True, "student": student.format_long()})
-
-
-# except Exception as err:
-#     print(err)
-#     abort(422)
 
 
 # TODO add logic for student to change their details
@@ -446,17 +432,20 @@ def resource_not_found(error):
     )
 
 
+# Will catch every type on unhandled exception as 422
+# A bit dirty but ok for a small project
+@app.errorhandler(Exception)
+@app.errorhandler(422)
+def unprocessable(error):
+    return jsonify({"success": False, "error": 422, "message": "Unprocessable"}), 422
+
+
 @app.errorhandler(405)
 def method_not_allowed(error):
     return (
         jsonify({"success": False, "error": 405, "message": "Method Not Allowed"}),
         405,
     )
-
-
-@app.errorhandler(422)
-def unprocessable(error):
-    return jsonify({"success": False, "error": 422, "message": "Unprocessable"}), 422
 
 
 @app.errorhandler(500)

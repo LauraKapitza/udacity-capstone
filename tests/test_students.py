@@ -3,40 +3,40 @@ import unittest
 from unittest.mock import patch
 
 
-from models import Class, DanceTypes, Teacher
+from models import Class, DanceTypes, Student
 
 from tests.base import BaseTestCase
-from tests.fixtures import teacher_factory
+from tests.fixtures import student_factory
 
 
-class TeachersTestCase(BaseTestCase):
+class StudentsTestCase(BaseTestCase):
     @patch("auth.auth.validate_token_or_raise")
     def test_get_list(self, _mock):
-        teacher = teacher_factory()
+        student = student_factory()
 
-        res = self.client.get("/teachers")
+        res = self.client.get("/students")
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
 
-        self.assertDictEqual(teacher.format_long(), data["teachers"][0])
+        self.assertDictEqual(student.format_long(), data["students"][0])
 
     @patch("auth.auth.validate_token_or_raise")
     def test_get_detail(self, _mock):
-        teacher = teacher_factory()
+        student = student_factory()
 
-        res = self.client.get(f"/teachers/{teacher.id}")
+        res = self.client.get(f"/students/{student.id}")
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
 
-        self.assertDictEqual(teacher.format_long(), data["teacher"])
+        self.assertDictEqual(student.format_long(), data["student"])
 
     @patch("auth.auth.validate_token_or_raise")
     def test_get_detail__404(self, _mock):
-        res = self.client.get(f"/teachers/999")
+        res = self.client.get(f"/students/999")
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
@@ -45,7 +45,7 @@ class TeachersTestCase(BaseTestCase):
     @patch("auth.auth.validate_token_or_raise")
     def test_post(self, _mock):
         res = self.client.post(
-            "/teachers",
+            "/students",
             json={
                 "user_id": "auth0|random-value",
                 "first_name": "John",
@@ -57,13 +57,13 @@ class TeachersTestCase(BaseTestCase):
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
-        teacher = Teacher.query.first()
-        self.assertEqual(data["teacher"]["id"], teacher.id)
+        student = Student.query.first()
+        self.assertEqual(data["student"]["id"], student.id)
 
     @patch("auth.auth.validate_token_or_raise")
     def test_post__400(self, _mock):
         res = self.client.post(
-            "/teachers",
+            "/students",
             json={},
         )
         data = json.loads(res.data)
@@ -73,9 +73,9 @@ class TeachersTestCase(BaseTestCase):
 
     @patch("auth.auth.validate_token_or_raise")
     def test_patch(self, _mock):
-        teacher = teacher_factory()
+        student = student_factory()
         res = self.client.patch(
-            f"/teachers/{teacher.id}",
+            f"/students/{student.id}",
             json={
                 "first_name": "batman",
             },
@@ -85,14 +85,14 @@ class TeachersTestCase(BaseTestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
         c = Class.query.first()
-        self.assertEqual(data["teacher"]["first_name"], "batman")
+        self.assertEqual(data["student"]["first_name"], "batman")
 
     @patch("auth.auth.validate_token_or_raise")
     def test_patch__404(self, _mock):
-        teacher = teacher_factory()
+        student = student_factory()
 
         res = self.client.patch(
-            f"/teachers/999",
+            f"/students/999",
             json={
                 "first_name": "batman",
             },
@@ -104,18 +104,18 @@ class TeachersTestCase(BaseTestCase):
 
     @patch("auth.auth.validate_token_or_raise")
     def test_delete(self, _mock):
-        teacher = teacher_factory()
+        student = student_factory()
 
-        res = self.client.delete(f"/teachers/{teacher.id}")
+        res = self.client.delete(f"/students/{student.id}")
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
-        self.assertEqual(Teacher.query.count(), 0)
+        self.assertEqual(student.query.count(), 0)
 
     @patch("auth.auth.validate_token_or_raise")
     def test_delete__404(self, _mock):
-        res = self.client.delete("/teachers/99")
+        res = self.client.delete("/students/99")
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)

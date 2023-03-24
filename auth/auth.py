@@ -141,10 +141,14 @@ It returns the decorator which passes the decoded payload to the decorated metho
 """
 
 
-def validate_token_or_raise(permission):
-    return dict()
+def extract_token_or_raise():
     token = get_token_auth_header()
     payload = decode_jwt(token)
+    return payload
+
+
+def validate_token_or_raise(permission):
+    payload = extract_token_or_raise()
     check_permissions(permission, payload)
     return payload
 
