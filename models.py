@@ -33,9 +33,11 @@ class Class(db.Model):
     __tablename__ = "classes"
 
     id = db.Column(db.Integer, primary_key=True)
-    participants = db.relationship("Student",
-                                   secondary=classes_through_students_table, back_populates="dance_classes"
-                                   )
+    participants = db.relationship(
+        "Student",
+        secondary=classes_through_students_table,
+        back_populates="dance_classes",
+    )
     teacher_id = db.Column(db.ForeignKey("teachers.id"))
     teacher = db.relationship("Teacher", back_populates="classes")
     dance_types = db.Column(ARRAY(db.Enum(DanceTypes)))
@@ -75,7 +77,7 @@ class Class(db.Model):
             "title": self.title,
             "description": self.description,
             "max_participants": self.max_participants,
-            "date": self.date,
+            "date": str(self.date),
             "start_time": self.start_time,
             "end_time": self.end_time,
         }
@@ -89,7 +91,7 @@ class Class(db.Model):
             "title": self.title,
             "description": self.description,
             "max_participants": self.max_participants,
-            "date": self.date,
+            "date": str(self.date),
             "start_time": self.start_time,
             "end_time": self.end_time,
         }
@@ -119,7 +121,7 @@ class Teacher(db.Model):
         return {
             "id": self.id,
             "first_name": self.first_name,
-            "last_name": self.last_name
+            "last_name": self.last_name,
         }
 
     def format_long(self):
@@ -128,7 +130,7 @@ class Teacher(db.Model):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "dance_types": [t.format() for t in self.dance_types],
-            "classes": [c.format_short() for c in self.classes]
+            "classes": [c.format_short() for c in self.classes],
         }
 
 
@@ -138,9 +140,9 @@ class Student(db.Model):
     id = db.Column(db.String, primary_key=True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
-    dance_classes = db.relationship("Class",
-                                    secondary=classes_through_students_table, back_populates="participants"
-                                    )
+    dance_classes = db.relationship(
+        "Class", secondary=classes_through_students_table, back_populates="participants"
+    )
 
     def insert(self):
         db.session.add(self)
@@ -157,7 +159,7 @@ class Student(db.Model):
         return {
             "id": self.id,
             "first_name": self.first_name,
-            "last_name": self.last_name
+            "last_name": self.last_name,
         }
 
     def format_long(self):
@@ -165,5 +167,5 @@ class Student(db.Model):
             "id": self.id,
             "first_name": self.first_name,
             "last_name": self.last_name,
-            "dance_classes": [c.format_short() for c in self.dance_classes]
+            "dance_classes": [c.format_short() for c in self.dance_classes],
         }
