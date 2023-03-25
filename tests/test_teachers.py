@@ -6,7 +6,7 @@ from unittest.mock import patch
 from models import Class, DanceTypes, Teacher
 
 from tests.base import BaseTestCase
-from tests.fixtures import teacher_factory
+from tests.fixtures import teacher_factory, classes_factory
 
 
 class TeachersTestCase(BaseTestCase):
@@ -130,6 +130,7 @@ class TeachersTestCase(BaseTestCase):
     @patch("auth.auth.validate_token_or_raise")
     def test_delete(self, _mock):
         teacher = teacher_factory()
+        dance_class = classes_factory(teacher_id=teacher.id)
 
         res = self.client.delete(f"/teachers/{teacher.id}")
         data = json.loads(res.data)
@@ -137,6 +138,7 @@ class TeachersTestCase(BaseTestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
         self.assertEqual(Teacher.query.count(), 0)
+        self.assertEqual(Class.query.count(), 0)
 
     @patch("auth.auth.validate_token_or_raise")
     def test_delete__404(self, _mock):

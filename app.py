@@ -276,6 +276,12 @@ def update_teacher(payload, teacher_id):
 @requires_auth("teachers:delete")
 def delete_teacher(payload, teacher_id):
     teacher = Teacher.query.filter_by(id=teacher_id).first_or_404()
+
+    classes = teacher.classes
+
+    for dance_class in classes:
+        dance_class.delete()
+
     teacher.delete()
 
     return jsonify(
