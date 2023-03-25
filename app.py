@@ -458,7 +458,7 @@ def resource_not_found(error):
 
 # Will catch every type on unhandled exception as 422
 # A bit dirty but ok for a small project
-# @app.errorhandler(Exception)
+@app.errorhandler(Exception)
 @app.errorhandler(422)
 def unprocessable(error):
     return jsonify({"success": False, "error": 422, "message": "Unprocessable"}), 422
