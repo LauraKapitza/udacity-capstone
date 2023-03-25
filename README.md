@@ -22,6 +22,7 @@ Students can register to a course they like.
 
 ## API Endpoints
 
+# TODO: FINISH ME
 GET /me
 
 GET /teachers

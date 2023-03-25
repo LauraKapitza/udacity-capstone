@@ -306,7 +306,6 @@ def get_students(payload):
     )
 
 
-# TODO add logic for student to create student
 @app.route("/students", methods=["POST"])
 @requires_auth("students:create")
 def add_student(payload):
@@ -330,7 +329,6 @@ def add_student(payload):
     return jsonify({"success": True, "student": student.format_long()})
 
 
-# TODO change students:add to all:read to have a generic read permission for all user types
 @app.route("/students/<string:student_id>")
 @requires_auth("students:read")
 def get_student(payload, student_id):
@@ -339,7 +337,6 @@ def get_student(payload, student_id):
     return jsonify({"success": True, "student": student.format_long()})
 
 
-# TODO add logic for student to change their details
 @app.route("/students/<string:student_id>", methods=["PATCH"])
 @requires_auth("students:update")
 def update_student(payload, student_id):
@@ -362,7 +359,6 @@ def update_student(payload, student_id):
     return jsonify({"success": True, "student": student.format_long()})
 
 
-# TODO add admin:delete role for admin to delete stuff
 @app.route("/students/<string:student_id>", methods=["DELETE"])
 @requires_auth("students:delete")
 def delete_student(payload, student_id):
