@@ -1,6 +1,6 @@
 # Dancing Queen Studio Project
 
-## specifications
+## Specifications
 
 Roles will include at least…
 - Two roles with different permissions
@@ -21,6 +21,8 @@ Students can register to a course they like.
 
 
 ## API Endpoints
+
+GET /me
 
 GET /teachers
 GET /teachers/:id
