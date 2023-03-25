@@ -1,10 +1,11 @@
-from functools import wraps
-
 from flask import jsonify, abort, request
 
 from auth.auth import requires_auth, AuthError
 from config import app
 from models import *
+
+# Hack to load the file
+from logger import *
 
 PAGE_LIMIT = 10
 

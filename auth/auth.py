@@ -1,10 +1,8 @@
-import json
 from flask import request
 from functools import wraps
 import jwt
 
-from urllib.request import urlopen
-from os import environ, abort
+from os import environ
 
 AUTH0_DOMAIN = environ.get("AUTH0_DOMAIN", "dev-udacity-lk.eu.auth0.com")
 ALGORITHMS = ["RS256"]
@@ -79,6 +77,8 @@ def check_permissions(permission, payload):
 
 
 def decode_jwt(token):
+    from app import app
+
     try:
         # gets the signing key
         issuer_url = f"https://{AUTH0_DOMAIN}/"
@@ -93,7 +93,7 @@ def decode_jwt(token):
             audience=API_AUDIENCE,
             issuer=issuer_url,
         )
-        print("payload", payload)
+        app.logger.info(f"payload: {payload}")
         return payload
 
     except jwt.ExpiredSignatureError:
