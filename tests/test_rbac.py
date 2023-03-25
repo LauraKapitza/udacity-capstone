@@ -21,6 +21,9 @@ class RBACTestCase(BaseTestCase):
             ]
         }
 
+        res = self.client.get("/me")
+        self.assertNotEqual(res.status_code, 403)
+
         res = self.client.get("/students")
         self.assertNotEqual(res.status_code, 403)
 
@@ -90,6 +93,9 @@ class RBACTestCase(BaseTestCase):
                 "teachers:update",
             ]
         }
+
+        res = self.client.get("/me")
+        self.assertNotEqual(res.status_code, 403)
 
         res = self.client.get("/students")
         self.assertNotEqual(res.status_code, 403)

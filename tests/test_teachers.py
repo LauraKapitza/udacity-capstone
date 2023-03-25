@@ -11,6 +11,31 @@ from tests.fixtures import teacher_factory
 
 class TeachersTestCase(BaseTestCase):
     @patch("auth.auth.validate_token_or_raise")
+    def test_me(self, _mock):
+        teacher = teacher_factory()
+        # Mock teacher token
+        _mock.return_value = {"sub": teacher.id}
+
+        res = self.client.get("/me")
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+
+        self.assertDictEqual(teacher.format_long(), data["me"])
+
+    @patch("auth.auth.validate_token_or_raise")
+    def test_me__404(self, _mock):
+        # Mock teacher token
+        _mock.return_value = {"sub": "not_found"}
+
+        res = self.client.get("/me")
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data["success"], False)
+
+    @patch("auth.auth.validate_token_or_raise")
     def test_get_list(self, _mock):
         teacher = teacher_factory()
 

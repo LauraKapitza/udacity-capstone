@@ -396,6 +396,27 @@ def get_dance_types():
 
 
 # ---------------------------------------------------------------------------- #
+# Me
+# ---------------------------------------------------------------------------- #
+
+
+@app.route("/me")
+@requires_auth("")
+def get_me(payload):
+    user_id = payload["sub"]
+
+    # Try to find a teacher with the token sub,
+    # otherwise try as student
+    # if both failed a 404 will be raised
+    try:
+        me = Teacher.query.filter_by(id=user_id).first_or_404()
+    except Exception as e:
+        me = Student.query.filter_by(id=user_id).first_or_404()
+
+    return jsonify({"success": True, "me": me.format_long()})
+
+
+# ---------------------------------------------------------------------------- #
 # Error handlers
 # ---------------------------------------------------------------------------- #
 
