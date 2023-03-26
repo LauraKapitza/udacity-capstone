@@ -1,0 +1,2811 @@
+{
+	"info": {
+		"_postman_id": "42a77a0c-439c-4878-871b-650d5acd8474",
+		"name": "udacity-capstone-dancestudio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "14147482"
+	},
+	"item": [
+		{
+			"name": "INITIALIZATION",
+			"item": [
+				{
+					"name": "token STUDENT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.collectionVariables.set(\"student_token\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "I3AIhGZ9wIcMLCRGySWD2Id1JA5uPY3I",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "eawWpNLTJVu2tyeQcSoFiIKT3Ei3M2h_-BzGD2yi5D-u7MkJjeh-CsM67buIA72t",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "https://dacing-queen-studio.onrender.com/",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "test@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "2022!am@CoffeeShopBaristaTester4Udacity2023",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://dev-udacity-lk.eu.auth0.com/oauth/token",
+							"protocol": "https",
+							"host": [
+								"dev-udacity-lk",
+								"eu",
+								"auth0",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"disabled": true
+								},
+								{
+									"key": "client_id",
+									"value": "I3AIhGZ9wIcMLCRGySWD2Id1JA5uPY3I",
+									"disabled": true
+								},
+								{
+									"key": "client_secret",
+									"value": "eawWpNLTJVu2tyeQcSoFiIKT3Ei3M2h_-BzGD2yi5D-u7MkJjeh-CsM67buIA72t",
+									"disabled": true
+								},
+								{
+									"key": "audience",
+									"value": "https://dacing-queen-studio.onrender.com/",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "token TEACHER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.collectionVariables.set(\"teacher_token\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "I3AIhGZ9wIcMLCRGySWD2Id1JA5uPY3I",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "eawWpNLTJVu2tyeQcSoFiIKT3Ei3M2h_-BzGD2yi5D-u7MkJjeh-CsM67buIA72t",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "https://dacing-queen-studio.onrender.com/",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "teacher-tester@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "2022!am@CoffeeShopBaristaTester4Udacity2023",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://dev-udacity-lk.eu.auth0.com/oauth/token",
+							"protocol": "https",
+							"host": [
+								"dev-udacity-lk",
+								"eu",
+								"auth0",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"disabled": true
+								},
+								{
+									"key": "client_id",
+									"value": "I3AIhGZ9wIcMLCRGySWD2Id1JA5uPY3I",
+									"disabled": true
+								},
+								{
+									"key": "client_secret",
+									"value": "eawWpNLTJVu2tyeQcSoFiIKT3Ei3M2h_-BzGD2yi5D-u7MkJjeh-CsM67buIA72t",
+									"disabled": true
+								},
+								{
+									"key": "audience",
+									"value": "https://dacing-queen-studio.onrender.com/",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "token MANAGER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.collectionVariables.set(\"manager_token\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "I3AIhGZ9wIcMLCRGySWD2Id1JA5uPY3I",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "eawWpNLTJVu2tyeQcSoFiIKT3Ei3M2h_-BzGD2yi5D-u7MkJjeh-CsM67buIA72t",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "https://dacing-queen-studio.onrender.com/",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "managertester@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "2022!am@CoffeeShopManagerTester4Udacity2023",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://dev-udacity-lk.eu.auth0.com/oauth/token",
+							"protocol": "https",
+							"host": [
+								"dev-udacity-lk",
+								"eu",
+								"auth0",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"disabled": true
+								},
+								{
+									"key": "client_id",
+									"value": "I3AIhGZ9wIcMLCRGySWD2Id1JA5uPY3I",
+									"disabled": true
+								},
+								{
+									"key": "client_secret",
+									"value": "eawWpNLTJVu2tyeQcSoFiIKT3Ei3M2h_-BzGD2yi5D-u7MkJjeh-CsM67buIA72t",
+									"disabled": true
+								},
+								{
+									"key": "audience",
+									"value": "https://dacing-queen-studio.onrender.com/",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Run this folder to set up the 3 tokens.  \nHas to be done before anything else."
+		},
+		{
+			"name": "Dance studio student",
+			"item": [
+				{
+					"name": "class routes",
+					"item": [
+						{
+							"name": "classes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"value contains a list of dance classes\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.classes).to.be.an('array')",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/classes?page=1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "class by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"respinse contains class\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('class');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/classes/:class_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes",
+										":class_id"
+									],
+									"variable": [
+										{
+											"key": "class_id",
+											"value": "{{existing_class_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete class",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/classes/:class_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes",
+										":class_id"
+									],
+									"variable": [
+										{
+											"key": "class_id",
+											"value": "{{existing_class_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new class",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"date\": \"2023-03-20\",\n    \"description\": \"I am an amazing dance class\",\n    \"end_time\": \"20:00\",\n    \"max_participants\": 15,\n    \"start_time\": \"18:00\",\n    \"title\": \"Amazing class\",\n    \"dance_types\": [\"hiphop\"]\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/classes"
+							},
+							"response": []
+						},
+						{
+							"name": "new participant to class",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"reponse contains added participant\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('added_participant');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": \"{{student_user_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/classes/:class_id/participants",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes",
+										":class_id",
+										"participants"
+									],
+									"variable": [
+										{
+											"key": "class_id",
+											"value": "{{existing_class_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "participant from class",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"reponse contains removed participant\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('removed_participant');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": \"{{student_user_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/classes/:class_id/participants",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes",
+										":class_id",
+										"participants"
+									],
+									"variable": [
+										{
+											"key": "class_id",
+											"value": "{{existing_class_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update class by teacher",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"description\": \"A nice dance class\",\n    \"title\": \"Baby dance\",\n    \"dance_types\": [\"dancehall\", \"hiphop\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/classes/:class_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes",
+										":class_id"
+									],
+									"variable": [
+										{
+											"key": "class_id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "student routes",
+					"item": [
+						{
+							"name": "me",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"reponse contains infos about myself\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData[\"me\"]).to.have.property('id');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}/me"
+							},
+							"response": []
+						},
+						{
+							"name": "students",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains students\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('students');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}/students"
+							},
+							"response": []
+						},
+						{
+							"name": "students by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains student\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('student');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/students/:student_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"students",
+										":student_id"
+									],
+									"variable": [
+										{
+											"key": "student_id",
+											"value": "{{student_user_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new student",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": \"{{student_user_id}}\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/students"
+							},
+							"response": []
+						},
+						{
+							"name": "patch student",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"John2\",\n    \"last_name\": \"Doe2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/students/:student_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"students",
+										":student_id"
+									],
+									"variable": [
+										{
+											"key": "student_id",
+											"value": "{{student_user_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete student",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/students/:student_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"students",
+										":student_id"
+									],
+									"variable": [
+										{
+											"key": "student_id",
+											"value": "{{student_user_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "teacher routes",
+					"item": [
+						{
+							"name": "me",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains user id\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData[\"me\"]).to.have.property('id');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{teacher_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}/me"
+							},
+							"response": []
+						},
+						{
+							"name": "teachers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains list of teachers\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('teachers');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{manager_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}/teachers"
+							},
+							"response": []
+						},
+						{
+							"name": "teachers by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains teacher\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('teacher');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/teachers/:teacher_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"teachers",
+										":teacher_id"
+									],
+									"variable": [
+										{
+											"key": "teacher_id",
+											"value": "{{teacher_user_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new teacher",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": \"{{teacher_user_id}}\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"dance_types\": [\"hiphop\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/teachers"
+							},
+							"response": []
+						},
+						{
+							"name": "patch teacher",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"John2\",\n    \"last_name\": \"Doe2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/teachers/:teacher_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"teachers",
+										":teacher_id"
+									],
+									"variable": [
+										{
+											"key": "teacher_id",
+											"value": "{{teacher_user_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete teacher",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/teachers/:teacher_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"teachers",
+										":teacher_id"
+									],
+									"variable": [
+										{
+											"key": "teacher_id",
+											"value": "{{teacher_user_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/dance-types",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains list of dance-types\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('dance_types');",
+									"    pm.expect(jsonData['dance_types']).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/dance-types"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": {
+					"token": "{{student_token}}"
+				}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "dance studio teacher",
+			"item": [
+				{
+					"name": "class routes",
+					"item": [
+						{
+							"name": "classes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"value contains a list of dance classes\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.classes).to.be.an('array')",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/classes?page=1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "class by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"respinse contains class\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('class');",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/classes/:class_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes",
+										":class_id"
+									],
+									"variable": [
+										{
+											"key": "class_id",
+											"value": "{{existing_class_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new class",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"value contains the added class\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('class');",
+											"    pm.expect(jsonData['class']['title']).to.eql('Amazing class');",
+											"    pm.expect(jsonData['class']['description']).to.eql('I am an amazing dance class');",
+											"});",
+											"",
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.collectionVariables.set(\"class_id_to_be_deleted\", jsonData.class.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"date\": \"2023-03-20\",\n    \"description\": \"I am an amazing dance class\",\n    \"end_time\": \"20:00\",\n    \"max_participants\": 15,\n    \"start_time\": \"18:00\",\n    \"title\": \"Amazing class\",\n    \"dance_types\": [\"hiphop\"]\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/classes"
+							},
+							"response": []
+						},
+						{
+							"name": "new participant to class",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": \"{{student_user_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/classes/:class_id/participants",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes",
+										":class_id",
+										"participants"
+									],
+									"variable": [
+										{
+											"key": "class_id",
+											"value": "{{existing_class_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "participant from class",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": \"{{student_user_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/classes/:class_id/participants",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes",
+										":class_id",
+										"participants"
+									],
+									"variable": [
+										{
+											"key": "class_id",
+											"value": "{{existing_class_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update class by teacher",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"value contains the added class\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('class');",
+											"    pm.expect(jsonData['class']['title']).to.eql('Baby dance');",
+											"    pm.expect(jsonData['class']['description']).to.eql('A nice dance class');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"description\": \"A nice dance class\",\n    \"title\": \"Baby dance\",\n    \"dance_types\": [\"dancehall\", \"hiphop\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/classes/:class_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes",
+										":class_id"
+									],
+									"variable": [
+										{
+											"key": "class_id",
+											"value": "{{existing_class_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete class",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"value contains the deleted class\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('deleted');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/classes/:class_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes",
+										":class_id"
+									],
+									"variable": [
+										{
+											"key": "class_id",
+											"value": "{{class_id_to_be_deleted}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "student routes",
+					"item": [
+						{
+							"name": "me",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"reponse contains infos about myself\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData[\"me\"]).to.have.property('id');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}/me"
+							},
+							"response": []
+						},
+						{
+							"name": "students",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains students\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('students');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}/students"
+							},
+							"response": []
+						},
+						{
+							"name": "students by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains student\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('student');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/students/:student_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"students",
+										":student_id"
+									],
+									"variable": [
+										{
+											"key": "student_id",
+											"value": "{{student_user_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new student",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": \"{{student_user_id}}\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/students"
+							},
+							"response": []
+						},
+						{
+							"name": "patch student",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"John2\",\n    \"last_name\": \"Doe2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/students/:student_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"students",
+										":student_id"
+									],
+									"variable": [
+										{
+											"key": "student_id",
+											"value": "{{student_user_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete student",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/students/:student_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"students",
+										":student_id"
+									],
+									"variable": [
+										{
+											"key": "student_id",
+											"value": "{{student_user_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "teacher routes",
+					"item": [
+						{
+							"name": "me",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains user id\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData[\"me\"]).to.have.property('id');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{teacher_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}/me"
+							},
+							"response": []
+						},
+						{
+							"name": "teachers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains list of teachers\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('teachers');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{manager_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}/teachers"
+							},
+							"response": []
+						},
+						{
+							"name": "teachers by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains teacher\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('teacher');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/teachers/:teacher_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"teachers",
+										":teacher_id"
+									],
+									"variable": [
+										{
+											"key": "teacher_id",
+											"value": "{{teacher_user_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new teacher",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": \"{{teacher_user_id}}\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"dance_types\": [\"hiphop\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/teachers"
+							},
+							"response": []
+						},
+						{
+							"name": "patch teacher",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains a teacher\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('teacher');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"John2\",\n    \"last_name\": \"Doe2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/teachers/:teacher_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"teachers",
+										":teacher_id"
+									],
+									"variable": [
+										{
+											"key": "teacher_id",
+											"value": "{{teacher_user_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete teacher",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/teachers/:teacher_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"teachers",
+										":teacher_id"
+									],
+									"variable": [
+										{
+											"key": "teacher_id",
+											"value": "{{teacher_user_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/dance-types",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains list of dance-types\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('dance_types');",
+									"    pm.expect(jsonData['dance_types']).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/dance-types"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": {
+					"token": "{{teacher_token}}"
+				}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "dance studio manager",
+			"item": [
+				{
+					"name": "class routes",
+					"item": [
+						{
+							"name": "classes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"value contains a list of dance classes\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.classes).to.be.an('array')",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/classes?page=1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "class by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"respinse contains class\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('class');",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/classes/:class_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes",
+										":class_id"
+									],
+									"variable": [
+										{
+											"key": "class_id",
+											"value": "{{existing_class_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new class",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"date\": \"2023-03-20\",\n    \"description\": \"I am an amazing dance class\",\n    \"end_time\": \"20:00\",\n    \"max_participants\": 15,\n    \"start_time\": \"18:00\",\n    \"title\": \"Amazing class\",\n    \"dance_types\": [\"hiphop\"]\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/classes"
+							},
+							"response": []
+						},
+						{
+							"name": "new participant to class",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": \"{{student_user_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/classes/:class_id/participants",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes",
+										":class_id",
+										"participants"
+									],
+									"variable": [
+										{
+											"key": "class_id",
+											"value": "{{existing_class_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "participant from class",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": \"{{student_user_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/classes/:class_id/participants",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes",
+										":class_id",
+										"participants"
+									],
+									"variable": [
+										{
+											"key": "class_id",
+											"value": "{{existing_class_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update class by teacher",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"description\": \"A nice dance class\",\n    \"title\": \"Baby dance\",\n    \"dance_types\": [\"dancehall\", \"hiphop\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/classes/:class_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes",
+										":class_id"
+									],
+									"variable": [
+										{
+											"key": "class_id",
+											"value": "{{existing_class_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete class",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/classes/:class_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"classes",
+										":class_id"
+									],
+									"variable": [
+										{
+											"key": "class_id",
+											"value": "{{class_id_to_be_deleted}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "student routes",
+					"item": [
+						{
+							"name": "students",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains students\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('students');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}/students"
+							},
+							"response": []
+						},
+						{
+							"name": "students by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains student\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('student');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/students/:student_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"students",
+										":student_id"
+									],
+									"variable": [
+										{
+											"key": "student_id",
+											"value": "{{student_user_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new student",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains student\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('student');",
+											"});",
+											"",
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.collectionVariables.set(\"student_id_to_be_deleted\", jsonData.student.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": \"fake-student-id\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/students"
+							},
+							"response": []
+						},
+						{
+							"name": "patch student",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"John2\",\n    \"last_name\": \"Doe2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/students/:student_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"students",
+										":student_id"
+									],
+									"variable": [
+										{
+											"key": "student_id",
+											"value": "{{student_user_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete student",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"value contains the deleted student\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('deleted');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/students/:student_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"students",
+										":student_id"
+									],
+									"variable": [
+										{
+											"key": "student_id",
+											"value": "{{student_id_to_be_deleted}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "teacher routes",
+					"item": [
+						{
+							"name": "teachers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains list of teachers\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('teachers');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{manager_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}/teachers"
+							},
+							"response": []
+						},
+						{
+							"name": "teachers by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains teacher\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('teacher');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/teachers/:teacher_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"teachers",
+										":teacher_id"
+									],
+									"variable": [
+										{
+											"key": "teacher_id",
+											"value": "{{teacher_user_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new teacher",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"response contains teacher\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('teacher');",
+											"});",
+											"",
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.collectionVariables.set(\"teacher_id_to_be_deleted\", jsonData.teacher.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": \"fake-teacher-id\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"dance_types\": [\"hiphop\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base_url}}/teachers"
+							},
+							"response": []
+						},
+						{
+							"name": "patch teacher",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403 since permission is invalid\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"John2\",\n    \"last_name\": \"Doe2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/teachers/:teacher_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"teachers",
+										":teacher_id"
+									],
+									"variable": [
+										{
+											"key": "teacher_id",
+											"value": "{{teacher_user_id}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete teacher",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"value contains the deleted teacher\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property('deleted');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/teachers/:teacher_id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"teachers",
+										":teacher_id"
+									],
+									"variable": [
+										{
+											"key": "teacher_id",
+											"value": "{{teacher_id_to_be_deleted}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/dance-types",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"response contains list of dance-types\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('dance_types');",
+									"    pm.expect(jsonData['dance_types']).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/dance-types"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": {
+					"token": "{{manager_token}}"
+				}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "{{manager_token}}"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:5000",
+			"type": "string"
+		},
+		{
+			"key": "student_user_id",
+			"value": "auth0|6416251ae32ba6997a88d75a",
+			"type": "string"
+		},
+		{
+			"key": "teacher_user_id",
+			"value": "auth0|63f7e8eefa1ca7f48b811c93",
+			"type": "string"
+		},
+		{
+			"key": "manager_user_id",
+			"value": "auth0|63f2a1dd6d5d1b1443e2e9b5",
+			"type": "string"
+		},
+		{
+			"key": "student_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "teacher_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "manager_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "existing_class_id",
+			"value": "4",
+			"type": "string"
+		},
+		{
+			"key": "class_id_to_be_deleted",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "teacher_id_to_be_deleted",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "student_id_to_be_deleted",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
